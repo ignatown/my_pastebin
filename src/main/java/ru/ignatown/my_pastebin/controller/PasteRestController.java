@@ -25,7 +25,7 @@ public class PasteRestController {
     }
 
     @GetMapping("/{shortUrl}")
-    public ResponseEntity<Paste> getPaste(@PathVariable String shortUrl) {
+    public ResponseEntity<Paste> getPaste(@PathVariable String shortUrl) throws IllegalArgumentException {
         return new ResponseEntity<>(
                 pasteService.getPaste(shortUrl),
                 HttpStatus.FOUND

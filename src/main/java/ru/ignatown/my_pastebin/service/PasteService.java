@@ -29,12 +29,15 @@ public class PasteService {
         return paste;
     }
 
-    public Paste getPaste(String shorURL) {
+    public Paste getPaste(String shorURL) throws IllegalArgumentException {
         Paste findPaste = pasteRepository.findByShortUrl(shorURL);
-        if (findPaste.getExpirationTime().isAfter(LocalDateTime.now())) {
-            return findPaste;
+        if (findPaste == null) {
+            throw new IllegalArgumentException("Not found paste with short url: " + shorURL);
         }
-        return null;
+        if (!findPaste.getExpirationTime().isAfter(LocalDateTime.now())) {
+            throw new IllegalArgumentException("The storage time of the paste with short url: " + shorURL + "has ended");
+        }
+        return findPaste;
     }
 
     public List<Paste> getLast10Paste() {
@@ -44,5 +47,4 @@ public class PasteService {
                 .limit(10)
                 .collect(Collectors.toList());
     }
-
 }
