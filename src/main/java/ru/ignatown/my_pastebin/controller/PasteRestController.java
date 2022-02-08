@@ -10,7 +10,7 @@ import ru.ignatown.my_pastebin.service.PasteService;
 
 import java.util.List;
 
-@Controller
+@RestController
 public class PasteRestController {
     private final PasteService pasteService;
 
