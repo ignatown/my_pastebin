@@ -1,8 +1,10 @@
 package ru.ignatown.my_pastebin.service;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import ru.ignatown.my_pastebin.entity.Paste;
 import ru.ignatown.my_pastebin.entity.PasteDTO;
+import ru.ignatown.my_pastebin.repository.AuthorRepository;
 import ru.ignatown.my_pastebin.repository.PasteRepository;
 import org.apache.commons.lang3.RandomStringUtils;
 
@@ -25,6 +27,7 @@ public class PasteService {
         paste.setPublic(pasteDTO.getPublicType().equals("public"));
         paste.setText(pasteDTO.getText());
         paste.setShortUrl(RandomStringUtils.randomAlphabetic(5));
+        paste.setAuthorName(SecurityContextHolder.getContext().getAuthentication().getName());
         pasteRepository.save(paste);
         return paste;
     }
