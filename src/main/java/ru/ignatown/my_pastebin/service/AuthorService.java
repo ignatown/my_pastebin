@@ -23,7 +23,10 @@ public class AuthorService {
         return authorRepository.findAuthorByUsername(username);
     }
 
-    public List<Author> findAllAuthors() {
-        return authorRepository.findAll();
+    public boolean nameVerification(String username) {
+            if (authorRepository.existsAuthorByUsername(username)) {
+                throw new IllegalArgumentException("There is already an author with the same username in the database");
+            }
+        return authorRepository.existsAuthorByUsername(username);
     }
 }

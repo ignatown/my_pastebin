@@ -1,4 +1,4 @@
-package ru.ignatown.my_pastebin.controller;
+package ru.ignatown.my_pastebin.exeption;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

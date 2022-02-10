@@ -23,13 +23,9 @@ public class UserController {
 
     @PostMapping("/reg")
     public ResponseEntity<Author> signUp(@RequestBody Author author) {
+        authorService.nameVerification(author.getUsername());
         author.setPassword(encoder.encode(author.getPassword()));
         return new ResponseEntity<>(authorService.save(author),
                 HttpStatus.CREATED);
-    }
-
-    @GetMapping("/all")
-    public List<Author> findAll() {
-        return authorService.findAllAuthors();
     }
 }
