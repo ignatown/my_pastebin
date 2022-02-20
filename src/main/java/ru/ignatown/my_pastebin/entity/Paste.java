@@ -1,6 +1,9 @@
 package ru.ignatown.my_pastebin.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -9,7 +12,9 @@ public class Paste {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @NotBlank(message = "Text of paste must be not empty")
     private String text;
+    @Positive(message = "Expiration time must be positive")
     private LocalDateTime expirationTime;
     private boolean isPublic;
     private String shortUrl;
