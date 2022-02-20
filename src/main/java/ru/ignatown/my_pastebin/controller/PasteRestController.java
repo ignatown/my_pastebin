@@ -18,7 +18,7 @@ public class PasteRestController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Paste> savePaste(@RequestBody PasteDTO pasteDTO) {
+    public ResponseEntity<Paste> savePaste(@RequestBody(required = false) PasteDTO pasteDTO) {
        return new ResponseEntity<>(
                pasteService.savePaste(pasteDTO),
                HttpStatus.CREATED);
